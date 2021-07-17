@@ -5,56 +5,54 @@
 <div class ="container" >
   <form [formGroup] ="registrationForm" (ngSubmit) ="onsubmit()">
     <h2 >Create Account</h2>
-
-  <div class="col-sm-3">
-    
-    <input type="text" placeholder="First name" class="form-control"formControlName='firstName' [ngClass]="{'is-invalid':submit&&f.firstName.errors}">
-    <div *ngIf='submit&&f.firstName.errors' class="invalid-feedback">
-    <div *ngIf="f.firstName.errors.required">First name is required</div>
-    </div>
-  </div>
+<div class="col-sm-3">
+  <input type="text" class="form-control"  placeholder="First Name" name="firstName" formControlName="firstName">
+  <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('firstName')?.touched && registrationForm.get('firstName')?.hasError('required')">This field cannot be empty</small>
+</div>
+  
 <br>
 
-  <div class="col-sm-3">
-    <input type="text" placeholder="Last name" class="form-control" formControlName="lastName"[ngClass]="{'is-invalid':submit&&f.lastName.errors}">
-    <div *ngIf='submit&&f.lastName.errors' class="invalid-feedback">
-    <div *ngIf="f.lastName.errors.required">Last name is required</div>
-    </div>
+<div class="col-sm-3">
+  <input type="text" class="form-control"  placeholder="Last Name" name="lastName" formControlName="lastName">
+  <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('lastName')?.touched && registrationForm.get('lastName')?.hasError('required')">This field cannot be empty</small>
   </div>
+
 <br>
 
-  <div class="col-sm-3">
-    <input type="email" placeholder="Email" class="form-control" formControlName="email"[ngClass]="{'is-invalid':submit&&f.email.errors}">
-    <div *ngIf='submit&&f.email.errors' class="invalid-feedback">
-    <div *ngIf="f.email.errors.required">Email is required</div>
-    <div *ngIf="f.email.errors.email">Invalid email</div>
-    </div>
-  </div>
+<div class="col-sm-3">
+  <input type="email" class="form-control"  placeholder="Email" name="email" formControlName="email">
+  <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.hasError('required')"> Email field is required</small>
+  <small style="color:red; font-weight: bolder;" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.hasError('email')">Invalid email</small>
+</div>
+  
 <br>
 
-  <div class="col-sm-3">
-    <input type="number" placeholder="Phone" class="form-control" formControlName="phone"[ngClass]="{'is-invalid':submit&&f.phone.errors}">
-    <div *ngIf='submit&&f.phone.errors' class="invalid-feedback">
-    <div *ngIf="f.phone.errors.required">Phone is required</div>
-    <div *ngIf="f.phone.errors.pattern">Invalid phone number</div>
-    </div>
-  </div>
+<div class="col-sm-3">
+    <input type="text" class="form-control"  placeholder="Phone Number" name="phone" formControlName="phone">
+    <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('phone')?.touched && registrationForm.get('phone')?.hasError('required')">Phone number is required</small>
+    <small style="color:red; font-weight: bolder;" *ngIf="registrationForm.get('phone')?.touched && registrationForm.get('phone')?.hasError('pattern')">Invalid phone number</small>
+</div>
+
 <br>
 
-  <div class="col-sm-3">
-    <input type="password" placeholder="Password" class="form-control" formControlName="password"[ngClass]="{'is-invalid':submit&&f.password.errors}">
-    <div *ngIf='submit&&f.password.errors' class="invalid-feedback">
-    <div *ngIf="f.password.errors.required">Password is required</div>
-    <div *ngIf="f.password.errors.pattern">Password should contain minimum 8 characters with at least one uppercase, lowercase, special characters & digits.</div>
-    </div>
-  </div>
+<div class="col-sm-3">
+    <input type="password" class="form-control"  placeholder="Enter your password" name="password" formControlName="password">  
+    <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.hasError('required')">Enter Your Password</small>
+    <small style="color:red; font-weight: bolder;" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.hasError('minlength')">Password should atleast minimum 8 characters</small>
+</div>
+
 <br>
 
- 
+<div class="col-sm-3">
+  <input type="password" class="form-control"  placeholder="Confirm Password" name="confirmpassword" formControlName="confirmpassword">
+  <small style="color: red; font-weight: bolder;" *ngIf="registrationForm.get('confirmpassword')?.touched && registrationForm.get('confirmpassword')?.hasError('required')">Re-enter password</small>
+  <small style="color:red; font-weight: bolder;" *ngIf="registrationForm.get('confirmpassword')?.touched && registrationForm.get('confirmpassword')?.hasError('MustMatch')">Password confirmation does not match</small>
+</div>
+
 
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a></p>
     
-      <button type="submit" class="btn btn-warning mb-3" >Sign up</button>
+      <button type="submit" class="btn btn-warning mb-3" [disabled] = "registrationForm.invalid">Sign up</button>
     
     <div>
       <p>Already have an account? <a href="#"> <button type="button" class="btn btn-success">Login</button> </a></p>
